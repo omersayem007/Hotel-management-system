@@ -1,0 +1,61 @@
+create table management ( emp_no number(20) primary key , job varchar(20) , e_name varchar(20) );
+
+insert into management values ( 123 , 'clerk' , 'allen' ) ;
+
+select * from management ;
+
+create table customer ( customer_id number(10) primary key , name varchar(20) , phone_no number(20), room_no  number(20) , purpose varchar(20), check_in varchar(20) ,check_out varchar(20) , customer_stetus varchar(20) ,  E_NAME varchar(20) ,emp_no number(20) , CONSTRAINT fk FOREIGN KEY (emp_no)
+REFERENCES management(emp_no)) ;
+
+insert into customer values ( 234, 'sayem' , 01865226555 , 651 ,' travelling ' , '13/2/2016' , '15/2/2016' , 'old customer' , 'allen' ,123 );
+
+select * from customer ;  
+
+create table room (customer_id number(10) ,room_no  number(20) ,  no_of_room number(20) , no_of_days number(20) ,  total_amount  number(20) , CONSTRAINT fk1 FOREIGN KEY (room_no)
+REFERENCES room_details( room_no)) ;
+ 
+
+insert into room values ( 234 , 651 , 1 , 3 , 2000 ) ;
+
+select * from room ; 
+
+
+create table room_details ( room_no  number(20) primary key , room_type varchar(20) , rent_value number(20) , room_stetus varchar(20) );
+
+insert into  room_details values ( 651 , 'single', 500 , 'available ') ;
+
+select * from room_details ; 
+
+
+create table  food_details( Iteam_no  number(20) primary key , food_type varchar(20) , food_detail varchar(20) );
+
+insert into  food_details values ( 1001 , 'indian' , 'dosa');
+
+select * from food_details 
+
+create table food ( customer_id number(10) , Iteam_no  number(20) , orderno number(20) , total_cost number(20)  ,CONSTRAINT fk2 FOREIGN Key(Iteam_no) REFERENCES food_details(Iteam_no) ) ;
+
+insert into food values  ( 234 , 1001 , 1 , 300 ) ; 
+
+select * from food ; 
+
+ 
+create table service_details  (   service_type varchar(20) primary key , service_detail varchar(20) ,service_cost number(20)  );
+
+insert into service_details values ( 'casino' , 'poker' , 1000 ); 
+
+select * from service_details ; 
+
+create table  service ( customer_id number(10)  ,service_type varchar(20) , service_cost number(20) , report varchar(20) ,CONSTRAINT fk3 FOREIGN Key(service_type) REFERENCES service_details(service_type) ) ;
+
+insert into service values ( 234 , 'casino' , 1000, 'bad' );
+
+select * from service ;
+
+
+create table payment ( customer_id number(10) , payment_type varchar(20)  , constraint pk5 foreign key(customer_id) references customer (customer_id) )
+
+insert into payment values ( 234, 'cash'); 
+
+select * from payment ; 
+  
